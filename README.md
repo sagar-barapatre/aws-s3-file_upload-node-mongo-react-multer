@@ -1,12 +1,8 @@
-The source code for my **[Medium Blog](https://medium.com/@paulrohan/sending-verification-otp-to-user-email-with-mailgun-in-a-react-node-and-mongo-app-56ba7e4ac29)**
+The source code for my **[Medium Blog](https://medium.com/@paulrohan/file-upload-to-aws-s3-bucket-in-a-node-react-mongo-app-and-using-multer-72884322aada)**
 
 A simple boilerplate project to implement AWS S3 file upload functionality in a Node, React and Mongo app. Using Multer for uploading file.
 
-#### The `master` branch has the code for AWS-S3 upload and the `disk-storage` branch has the working app for uploading file to the project root at the disk with no AWS-s3 connection.
-
-#### The 'sending-otp-with-mailgun' branch has the code where, user will received an email containing a unique code, then he/she has to put that OTP back in the app, and only then will be able to view download a file.
-
-### Note all of these brances will ONLY work after proper AWS or mailgun credentials (API key, Secret Key etc) are are set up in the .env file or the .env.override file
+The `master` branch has the code for AWS-S3 upload and the `disk-storage` branch has the working app for uploading file to the project root at the disk with no AWS-s3 connection.
 
 ### To launch this project in the local machine
 
@@ -20,12 +16,15 @@ It will start the server at [http://localhost:3000/](http://localhost:3000/)
 
 ### Most importantly remember to replace AWS S3's bucket_name, AWSAccessKeyId and AWSSecretKey wth your own. I have kept those keys of mine in the .env file in the project root, and which ofcourse have been put in the gitignore file so not be make them public.
 
+<img src="AWS_S3-1.png">
+
+<img src="app-running-in-localhost.png">
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Example .env file (WHICH MUST NEVER BE PUSHED TO ANY PUBLIC REPOSITORY LIKE GITHUB )
 
-
+<img src="example-env-file.png">
 
 ## ALWAYS PUT THIS .env FILE IN THE .gitignore FILE
 
@@ -57,13 +56,13 @@ And I will get back a 200 OK response of the below form-data
 
 ```js
 {
-    "data": {
-    "ETag": "a number",
-    "Location": "full link of the file",
-    "key": "original file name of the file that I uploaded",
-    "Key": "original file name of the file that I uploaded",
-    "Bucket": "my AWS s3 bucket name"
-    }
+	"data": {
+	"ETag": "a number",
+	"Location": "full link of the file",
+	"key": "original file name of the file that I uploaded",
+	"Key": "original file name of the file that I uploaded",
+	"Bucket": "my AWS s3 bucket name"
+	}
 }
 ```
 
@@ -96,9 +95,9 @@ So in the backend upload routes .js file I put the `console.log()` code to see w
 
 ```js
 let s3bucket = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION
+	accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+	region: process.env.AWS_REGION
 });
 ```
 
@@ -114,13 +113,13 @@ console.log(process.env.AWS_Uploaded_File_URL_LINK);
 
 And saw it was taking a completely wrong AWS credentials.
 
-Then first I ran the following commands to clear the existing env variables.
+Then first I ran the following commands
 
 `echo $AWS_ACCESS_KEY_ID`
 
 `echo $AWS_SECRET_ACCESS_KEY`
 
-[ And both the above commands will give different credentials than what I have in .env file and which is what the running app was taking. ]
+And both will give different credentials than what I have in .env file.
 
 Then I ran the command
 
